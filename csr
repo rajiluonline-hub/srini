@@ -1,0 +1,115 @@
+10.191.202.26 - digimfpuatwas01
+10.191.202.27 - mfpptwas01
+10.191.202.28 - digimfpptwas02
+10.191.202.29 - digimfpptwas03
+10.191.202.30 - digimfpptwas04
+10.191.204.142 - digimfpuatweb02
+10.191.204.143 - digimfpptweb02
+
+
+
+openssl req -utf8 -new -newkey rsa:2048 -out digimfpptwas02.csr -keyout digimfpptwas02.key -config csr1.conf -nodes
+
+========================================================================================================================
+
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+default_bits = 2048     #RSA Key size
+prompt = no
+
+[req_distinguished_name]
+C   = IN
+ST  = MAHARASHTRA
+L   = NAVI MUMBAI
+O   = STATE BANK OF INDIA
+OU  = IT-PROJECT LOTUS
+CN  = digimfpptwas02
+
+[v3_req]
+#KeyUsage = KeyEncipherment, dataEncipherment
+#extendedUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = digimfpuatwas01
+DNS.2 = mfpptwas01
+DNS.3 = digimfpptwas02
+DNS.4 = digimfpptwas03
+DNS.5 = digimfpptwas04
+DNS.6 = digimfpuatweb02
+DNS.7 = digimfpptweb02
+DNS.8 = 10.191.202.26
+DNS.9 = 10.191.202.27
+DNS.10 = 10.191.202.28
+DNS.11 = 10.191.202.29
+DNS.12 = 10.191.202.30
+DNS.13 = 10.191.204.142
+DNS.14 = 10.191.204.143
+open ssl req 
+===========================================================
+
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDzjCCArYCAQAwgYwxCzAJBgNVBAYTAklOMRQwEgYDVQQIDAtNQUhBUkFTSFRS
+QTEUMBIGA1UEBwwLTkFWSSBNVU1CQUkxHDAaBgNVBAoME1NUQVRFIEJBTksgT0Yg
+SU5ESUExGTAXBgNVBAsMEElULVBST0pFQ1QgTE9UVVMxGDAWBgNVBAMMD2RpZ2lt
+ZnB1YXR3YXMwMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAPWR823I
+FQkDUX8k9dFNk4gk+D3WWJzz+ogC33Rez9qMnnZD7DgKmAcsNGVBJRijZMcFgOaB
+fsSIkVHdSENjWoEc+q65eDl315BuL2M4NNDzwzo3ibASdkmHavJShORN6vVLErjy
+4ffgv0IXyIZIh5F4KJ6tOqlI9iuhrBo9yh6En73VdHhxGt7wSSuvb+QjQMDzcsyJ
+80hIs4Z7h284p8CbDpIHjjc2DWj6WIPRT7ARIHzVyJ8fstVEqE1HN171sKTObH5a
+3QMsiEAMnyHz+ywAXTCQX3ZuQjnqa1ShUL76y/4Yq4Jd8FfL3zhkP72jg9/vMcH5
+i7zjdM2rrD1ZrsMCAwEAAaCB+zCB+AYJKoZIhvcNAQkOMYHqMIHnMIHkBgNVHREE
+gdwwgdmCD2RpZ2ltZnB1YXR3YXMwMYIKbWZwcHR3YXMwMYIOZGlnaW1mcHB0d2Fz
+MDKCDmRpZ2ltZnBwdHdhczAzgg5kaWdpbWZwcHR3YXMwNIIPZGlnaW1mcHVhdHdl
+YjAygg5kaWdpbWZwcHR3ZWIwMoINMTAuMTkxLjIwMi4yNoINMTAuMTkxLjIwMi4y
+N4INMTAuMTkxLjIwMi4yOIINMTAuMTkxLjIwMi4yOYINMTAuMTkxLjIwMi4zMIIO
+MTAuMTkxLjIwNC4xNDKCDjEwLjE5MS4yMDQuMTQzMA0GCSqGSIb3DQEBCwUAA4IB
+AQBElhsI2cfJGEf+Bpd3AoAJbu4lrWLDm3NXBm0SHfmDtejkPJMnZ2G7zmw9xFPn
+i1fCwNx/Q3yqOLKqg51wqgcQTB/kb1+GAA5y0CkWsjfrbI3R5rj/qxEMQRHoQtMf
+0TL4iPWO6Yqcj6jzUmZYoJv6cdCBR9jwh+Pu5pbpd7sJlmyZlUT30aR4BRq5Xjbs
+QBSnaobe1TOuPIZHC5TzWUMHIGKJQtegFdfcjZxuxDUlew2XCm9RxFYWrwdBPO+C
+oNx+g2ac7VXC7qA/0scuLACLkONF99GYhXNEn0cqesm3UL1fE7H71w0BW4e+44yt
+hFIOqmow/40X4YJ4Oh4UE8k/
+-----END CERTIFICATE REQUEST-----
+
+
+Your Request Id is 1102359
+===============================================================================
+
+
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDzTCCArUCAQAwgYsxCzAJBgNVBAYTAklOMRQwEgYDVQQIDAtNQUhBUkFTSFRS
+QTEUMBIGA1UEBwwLTkFWSSBNVU1CQUkxHDAaBgNVBAoME1NUQVRFIEJBTksgT0Yg
+SU5ESUExGTAXBgNVBAsMEElULVBST0pFQ1QgTE9UVVMxFzAVBgNVBAMMDmRpZ2lt
+ZnBwdHdhczAyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqNDqJvDr
+1P9ftynfvuP6cwNZtnEjaxhUniDnJ1TTUQVwoyeRiKICppDWRzLs5ZYESSs+yFzF
+n7Sqptz4us62+AWGMCyGnz5QOCpkLDomSPgifDlgPbgo7iJ26oyQSAw/b2VJP0dv
+vKPgenBQWSthxen0ZxtU4F3bBsTS4wiI/oyAjuXEjp0GTHVvhWUna75NrV5KnQyw
+pwVU4WHqdV5RAR2x7HkneayJwyKmh2t6PgJ0dkUVw5V2jr1C/aKQVePyHJcF4Jqy
+ulYFahBLpD9RpUJiIaqwt0L5jvDVR/FmBA45eCq71kW/QrMUBCyiiJKNtxGm/ASx
+rTvCEGDD2Md9UwIDAQABoIH7MIH4BgkqhkiG9w0BCQ4xgeowgecwgeQGA1UdEQSB
+3DCB2YIPZGlnaW1mcHVhdHdhczAxggptZnBwdHdhczAxgg5kaWdpbWZwcHR3YXMw
+MoIOZGlnaW1mcHB0d2FzMDOCDmRpZ2ltZnBwdHdhczA0gg9kaWdpbWZwdWF0d2Vi
+MDKCDmRpZ2ltZnBwdHdlYjAygg0xMC4xOTEuMjAyLjI2gg0xMC4xOTEuMjAyLjI3
+gg0xMC4xOTEuMjAyLjI4gg0xMC4xOTEuMjAyLjI5gg0xMC4xOTEuMjAyLjMwgg4x
+MC4xOTEuMjA0LjE0MoIOMTAuMTkxLjIwNC4xNDMwDQYJKoZIhvcNAQELBQADggEB
+AAcQz4f0x8Mrk5oSJ08deimG0324ajfrv5IRt0MNz0dWVbflOuyA0JYFrnxNROUK
+o9qU7M/ID1i/0VDreKZ977ONtxclYiOGHm8BEyG4xY11aJZwnx6w5+mkuWSogu+1
+sUQTvrf7BsBeHjlqr5nCZKM3B7A7iMdz59Gi7FuFzHhqN4zkdceJoSlSi3eub0EW
+yD5iNNr0EmLIIy6nLnriExa8hKRIZCPn6URR/ZAoE8arm8RnS8SnclbX7fK3ElKr
+9DV4zS15mIW1YId8lsJ0V79hfCq68inmKxc7B32txM9jjtVNVeMJ/HJtnssKMzsS
+xkyU2Fago/sUAvLWij/E05c=
+-----END CERTIFICATE REQUEST-----
+
+Your Request Id is 1102360
+
+======================================================================================
+
+Raised certificate from 10.177.34.46
+
+/lotus/logs/PTCert_2023
+
+\\10.30.55.133\Sw Downloads\Manideep\PT-Certificates
+
+=====================================================
