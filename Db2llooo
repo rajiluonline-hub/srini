@@ -1,0 +1,34 @@
+scp -P 22022 /root/FILENET/UAT/UAT_DB_DDL_01112025/*.ddl db2inst1@10.191.204.66:/home/db2inst1/uat_ddl
+
+
+scp -r -P 22022  db2inst1@10.191.204.65:/lotus/fn/db2inst1
+
+ssh db2inst1@10.191.204.65 "df -h"
+
+db2 force applications all; for db in `db2 list db directory | grep alias | cut -f2 -d"=" | xargs `; do echo backing up $db;db2 backup db $db; done
+
+grep "\.\.\.\.\.\." deep2.sh.out
+
+
+Db2 Data Restore:--------
+
+db2 restore db digisbiu into digisbis
+db2 restore db digiicn
+db2 restore db digifss
+db2 restore db actstmt
+db2 restore db digippic
+db2 restore db digiobj1
+db2 restore db digiloan
+db2 restore db wimdb
+
+
+
+revoke SELECT ON TABLE "GCD"."FNGCD" TO USER "DAMVA" ;
+
+db2 revoke SELECT ON TABLE "GCD"."FNGCD_ADDON" from USER "DAMVA" ;
+db2 revoke SELECT ON TABLE "GCD"."FNGCD_CESERVERS" from USER "DAMVA" ;
+db2 revoke SELECT ON TABLE "GCD"."FNGCD_OSCBROWNERS" from USER "DAMVA" ;
+db2 revoke CONNECT ON DATABASE  from USER "DAMVA" ;
+
+
+
