@@ -1,0 +1,37 @@
+BM FileNet P8 – CPE JVM & JDBC Tuning Guide
+(Linux)
+This document provides recommended JVM and JDBC configuration steps to address slow search
+performance observed via ACCE / CPE on Linux systems, especially after migration from AIX.
+These steps assume DB and LDAP performance have already been validated as healthy.
+1. JDBC Statement Cache Configuration
+Enable and size the JDBC statement cache to allow reuse of prepared SQL statements used by
+FileNet search operations.
+1 WebSphere Admin Console → Resources → JDBC → Data sources →
+2 Set Statement cache size to 50–100
+3 Apply changes and restart the CPE JVM
+2. Auto-Commit Verification
+Ensure JDBC auto-commit is disabled. Auto-commit ON causes unnecessary transaction overhead
+during result fetching.
+1 DataSource → Custom properties
+2 Verify property autocommit=false (default if not present)
+3. JDBC Fetch Size (Critical for Search Performance)
+Increase JDBC fetch size to reduce round trips between CPE and DB2 during search result
+retrieval.
+1 Servers → WebSphere application servers → CPE → Java Virtual Machine
+2 Add JVM argument: -Dcom.ibm.db2.jcc.am.fetchSize=1000
+3 Restart CPE JVM
+4. Recommended JVM Heap & GC Settings (Linux)
+Linux JVM defaults are conservative. FileNet CPE requires explicit heap sizing and garbage
+collection tuning to efficiently hydrate search results.
+1-Xms8g
+2-Xmx8g
+3-XX:+UseG1GC
+4-XX:MaxGCPauseMillis=200
+5. DNS / Hostname Resolution Validation
+Ensure fast forward and reverse DNS resolution for the CPE host to avoid hidden latency during
+JDBC and internal JVM operations.
+1 Validate hostname resolution using: hostname -f, getent hosts
+2 Ensure proper /etc/hosts entries exist
+6. Post-Change Validation
+After applying the above settings and restarting CPE, validate improvements by comparing ACCE
+search response time and time-to-first-result
