@@ -1,0 +1,436 @@
+
+ 
+
+
+
+Table of Contents
+Custom Installations	2
+Installing IBM Installation Manager 1.9.3.2	4
+Installing IBM WebSphere Application Server 9.0.5.25	5
+Creating WAS Cluster and members	15
+Configuring CERest App	21
+Configuring Other Custom Apps	23
+
+
+
+ 
+Custom Installations
+
+Steps
+1.	Create a user cpeadmin and its group as p8admin
+sudo useradd -m -s /bin/bash cpeadmin
+sudo passwd cpeadmin
+sudo groupadd p8admin
+sudo usermod -g p8admin cpeadmin
+2.	Change owner for /lotus
+chown -R cpeadmin:p8admin /lotus
+3.	Login as cpeadmin and create directory /lotus/ds1/IBM
+su – cpeadmin
+mkdir /lotus/ds1/IBM or mkdir /lotus/data01/IBM
+4.	Login as root and create a link for /opt/IBM to /lotus/ds1/IBM. 
+cd /opt
+ln -s /lotus/ds1/IBM IBM or ln -s /lotus/data01/IBM IBM
+chown -h cpeadmin:p8admin /opt/IBM
+chmod 777 /opt/IBM
+5.	Login as cpeadmin and create a directory for all the binaries
+su - cpeadmin
+mkdir /home/cpeadmin/Softwares
+chmod 777 /home/cpeadmin/Softwares
+chmod 777 /home/cpeadmin
+6.	Copy all binaries to /home/cpeadmin/Softwares/ 
+Assign owner as cpeadmin, assign group as p8admin and assign permissions 777 to the binaries
+	Custom Node
+ 
+
+7.	Add entries in /etc/hosts
+DC Servers
+##### CUSTOM SERVERS #####
+10.191.10.86    digifilprodappcustns01
+10.191.10.90    digifilprodappcustns02
+10.191.10.93    digifilprodappcustns03
+10.191.10.89    digiprodwasappns04
+10.191.10.95    digiprodwasappns05
+
+##### CPE SERVERS #####
+10.191.10.87    digifilprodapppfns01    # IBM CPE Node 1
+10.191.10.91    digifilprodapppfns02    # IBM CPE Node 2
+10.191.10.94    digifilprodapppfns03    # IBM CPE Node 3
+
+##### ICN SERVERS #####
+10.191.10.88	digifilprodappnavns01   # IBM ICN Node 1
+10.191.10.92	digifilprodappnavns01   # IBM ICN Node 2
+
+DR Servers
+##### CUSTOM SERVERS #####
+10.176.71.5		digifilprodappcustdr01
+10.176.71.9		digifilprodappcustdr02
+10.176.71.12	digifilprodappcustdr03
+10.176.71.8		digiprodwasappdr04
+10.176.71.14	digiprodwasappdr05
+
+##### CPE SERVERS #####
+10.176.71.6		digifilprodapppfdr01	# IBM CPE Node 1
+10.176.71.10	digifilprodapppfdr02	# IBM CPE Node 2
+10.176.71.13	digifilprodapppfdr03	# IBM CPE Node 3
+
+##### ICN SERVERS #####
+10.176.71.7		digifilprodappnavdr01   # IBM ICN Node 1
+10.176.71.11	digifilprodappnavdr02   # IBM ICN Node 2
+8.	Enable ports.
+firewall-cmd --add-port=8879/tcp --permanent
+firewall-cmd --add-port=9043/tcp --permanent 
+firewall-cmd --add-port=9060/tcp --permanent  
+firewall-cmd --add-port=9809/tcp --permanent
+
+DC Servers
+firewall-cmd --add-port=5060/tcp --permanent
+firewall-cmd --add-port=5061/tcp --permanent
+firewall-cmd --add-port=5558/tcp --permanent  
+firewall-cmd --add-port=5578/tcp --permanent 
+firewall-cmd --add-port=7276/tcp --permanent
+firewall-cmd --add-port=7286/tcp --permanent
+firewall-cmd --add-port=8880/tcp --permanent
+firewall-cmd --add-port=9044/tcp --permanent
+firewall-cmd --add-port=9061/tcp --permanent
+firewall-cmd --add-port=9080/tcp --permanent  
+firewall-cmd --add-port=9101/tcp --permanent
+firewall-cmd --add-port=9354/tcp --permanent
+firewall-cmd --add-port=9404/tcp --permanent
+firewall-cmd --add-port=9405/tcp --permanent
+firewall-cmd --add-port=9406/tcp --permanent
+firewall-cmd --add-port=9443/tcp --permanent
+firewall-cmd --add-port=9633/tcp --permanent
+firewall-cmd --add-port=9810/tcp --permanent
+firewall-cmd --add-port=11007/tcp --permanent
+firewall-cmd --add-port=11008/tcp --permanent
+
+DR Servers
+firewall-cmd --add-port=5559/tcp --permanent
+firewall-cmd --add-port=5579/tcp --permanent
+firewall-cmd --add-port=5062/tcp --permanent
+firewall-cmd --add-port=5063/tcp --permanent
+firewall-cmd --add-port=7278/tcp --permanent
+firewall-cmd --add-port=7287/tcp --permanent
+firewall-cmd --add-port=8881/tcp --permanent
+firewall-cmd --add-port=9045/tcp --permanent
+firewall-cmd --add-port=9062/tcp --permanent
+firewall-cmd --add-port=9081/tcp --permanent
+firewall-cmd --add-port=9102/tcp --permanent
+firewall-cmd --add-port=9355/tcp --permanent
+firewall-cmd --add-port=9407/tcp --permanent
+firewall-cmd --add-port=9408/tcp --permanent
+firewall-cmd --add-port=9409/tcp --permanent
+firewall-cmd --add-port=9444/tcp --permanent
+firewall-cmd --add-port=9634/tcp --permanent
+firewall-cmd --add-port=9811/tcp --permanent
+firewall-cmd --add-port=11009/tcp --permanent
+firewall-cmd --add-port=11010/tcp --permanent
+
+systemctl restart firewalld
+
+Note: Login and install software as user cpeadmin
+su – cpeadmin
+cd /home/cpeadmin/Softwares
+
+Installing IBM Installation Manager 1.9.3.2
+Steps
+1.	Create a directory to extract the binary for IBM Installation Manager
+mkdir /home/cpeadmin/Softwares/IM
+2.	Extract IBM Installation Manager
+unzip agent.installer.linux.gtk.x86_64_1.9.3002.20250425_1344.zip -d /home/cpeadmin/Softwares/IM
+3.	Install IBM Installation Manager in Silent Mode
+/home/cpeadmin/Softwares/IM/installc -silent -acceptLicense -installationDirectory /opt/IBM/InstallationManager -accessRights nonAdmin
+ 
+4.	[Optional] Check for installed packages
+/opt/IBM/InstallationManager/eclipse/tools/imcl listInstalledPackages
+ 
+5.	[Optional] Check Installation Manager version
+/opt/IBM/InstallationManager/eclipse/tools/imcl -version
+
+ 
+
+Installing IBM WebSphere Application Server 9.0.5.25
+Steps
+1.	Create directories to extract the binaries for IBM WAS and Fix Pack 
+mkdir -p /home/cpeadmin/Softwares/WAS/nd
+mkdir -p /home/cpeadmin/Softwares/WAS/fp25
+mkdir /home/cpeadmin/Softwares/java35
+mkdir /home/cpeadmin/Softwares/java55
+2.	Unzip the binaries
+unzip was.repo.90501.nd.zip -d /home/cpeadmin/Softwares/WAS/nd
+unzip 9.0.5-WS-WAS-FP025.zip -d /home/cpeadmin/Softwares/WAS/fp25
+unzip ibm-java-sdk-8.0-8.35-linux-x64-installmgr.zip -d /home/cpeadmin/Softwares/java35
+unzip ibm-java-sdk-8.0-8.55-linux-x64-installmgr.zip -d /home/cpeadmin/Softwares/java55
+3.	Check for packages in repository config
+/opt/IBM/InstallationManager/eclipse/tools/imcl listAvailablePackages -repositories /home/cpeadmin/Softwares/WAS/nd/repository.config
+/opt/IBM/InstallationManager/eclipse/tools/imcl listAvailablePackages -repositories /home/cpeadmin/Softwares/WAS/fp25/repository.config
+/opt/IBM/InstallationManager/eclipse/tools/imcl listAvailablePackages -repositories /home/cpeadmin/Softwares/java35/repository.config
+/opt/IBM/InstallationManager/eclipse/tools/imcl listAvailablePackages -repositories /home/cpeadmin/Softwares/java55/repository.config
+
+ 
+4.	Install WAS with IBM Java patch level 35.
+/opt/IBM/InstallationManager/eclipse/tools/imcl install \
+com.ibm.websphere.ND.v90_9.0.5001.20190828_0616 \
+com.ibm.java.jdk.v8_8.0.8035.20241125_0150 \
+-accessRights nonAdmin \
+-acceptLicense \
+-showProgress \
+-repositories /home/cpeadmin/Softwares/WAS/nd/repository.config,/home/cpeadmin/Softwares/java35/repository.config \
+-installationDirectory /opt/IBM/WebSphere/AppServer \
+-sharedResourcesDirectory /opt/IBM/IMShared \
+-record /home/cpeadmin/Softwares/install_was.xml
+  
+
+5.	[Optional] View install_was.xml contents
+cat /home/cpeadmin/Softwares/install_was.xml
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='/opt/IBM/IMShared'/>
+  </variables>
+  <server>
+    <repository location='/home/cpeadmin/Softwares/java35'/>
+    <repository location='/home/cpeadmin/Softwares/WAS/nd'/>
+  </server>
+  <profile id='IBM WebSphere Application Server V9.0' installLocation='/opt/IBM/WebSphere/AppServer'>
+    <data key='cic.selector.arch' value='x86_64'/>
+  </profile>
+  <install>
+    <!-- IBM WebSphere Application Server Network Deployment  9.0.5.1 -->
+    <offering profile='IBM WebSphere Application Server V9.0' id='com.ibm.websphere.ND.v90' version='9.0.5001.20190828_0616' features='core.feature,ejbdeploy,thinclient,embeddablecontainer'/>
+    <!-- IBM SDK, Java Technology Edition, Version 8 8.0.8.35 -->
+    <offering profile='IBM WebSphere Application Server V9.0' id='com.ibm.java.jdk.v8' version='8.0.8035.20241125_0150' features='com.ibm.sdk.8'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+</agent-input>
+
+6.	Apply WAS Fix Pack 25 with IBM Java patch level 55.
+/opt/IBM/InstallationManager/eclipse/tools/imcl install \
+com.ibm.websphere.ND.v90_9.0.5025.20250820_1643 \
+com.ibm.java.jdk.v8_8.0.8055.20251007_2253 \
+-accessRights nonAdmin \
+-acceptLicense \
+-showProgress \
+-repositories /home/cpeadmin/Softwares/WAS/fp25/repository.config,/home/cpeadmin/Softwares/java55/repository.config \
+-installationDirectory /opt/IBM/WebSphere/AppServer \
+-sharedResourcesDirectory /opt/IBM/IMShared
+ 
+
+7.	Check for installed packages
+/opt/IBM/InstallationManager/eclipse/tools/imcl listInstalledPackages
+  
+8.	[Optional] Verify the version
+/opt/IBM/WebSphere/AppServer/bin/versionInfo.sh
+
+ 
+9.	[Only on the DMgr server] Create DMgr profile 
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -create -profileName Dmgr -profilePath /opt/IBM/WebSphere/AppServer/profiles/Dmgr -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/management -enableAdminSecurity true -adminUserName wasadmin -adminPassword wasadmin
+ 
+10.	[Only on the DMgr server] [Optional] Check profile details.
+cat /opt/IBM/WebSphere/AppServer/profiles/Dmgr/logs/AboutThisProfile.txt
+10.191.10.86	digifilprodappcustns01
+ 
+10.191.10.89	digiprodwasappns04
+ 
+
+11.	[Only on the DMgr server] Start the Deployment Manager.
+/opt/IBM/WebSphere/AppServer/bin/startManager.sh -profileName Dmgr
+ 
+12.	Create AppSrv profile
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -create -profileName AppSrv01 -profilePath /opt/IBM/WebSphere/AppServer/profiles/AppSrv01 -templatePath /opt/IBM/WebSphere/AppServer/profileTemplates/managed
+ 
+13.	[Optional] Check profile details.
+cat /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/logs/AboutThisProfile.txt
+10.191.10.86	digifilprodappcustns01
+ 
+10.191.10.90	digifilprodappcustns02
+ 
+10.191.10.93	digifilprodappcustns03
+ 
+
+10.191.10.89	digiprodwasappns04
+ 
+10.191.10.95	digiprodwasappns05
+ 
+
+14.	Add node AppSrv to Deployment Manager (edit the Dmgr hostname in the command accordingly)
+
+10.191.10.86	digifilprodappcustns01
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/addNode.sh digifilprodappcustns01 8879 -username wasadmin -password wasadmin
+ 
+
+10.191.10.90	digifilprodappcustns02
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/addNode.sh digifilprodappcustns01 8879 -username wasadmin -password wasadmin
+ 
+
+10.191.10.93	digifilprodappcustns03
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/addNode.sh digifilprodappcustns01 8879 -username wasadmin -password wasadmin
+ 
+
+10.191.10.89	digiprodwasappns04
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/addNode.sh digiprodwasappns04 8879 -username wasadmin -password wasadmin
+ 
+10.191.10.95	digiprodwasappns05
+/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/addNode.sh digiprodwasappns04 8879 -username wasadmin -password wasadmin
+ 
+ 
+Creating WAS Cluster and members
+
+1.	[Only on the DMgr server] Create cluster using WAS Admin Console
+
+10.191.10.86	digifilprodappcustns01
+https://10.191.10.86:9043/ibm/console/login.do?action=secure 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Save the changes. 
+ 
+ 
+ 
+
+10.191.10.90	digifilprodappcustns02
+https://10.191.10.89:9043/ibm/console/login.do?action=secure 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Save the changes. 
+ 
+ 
+ 
+ 
+Configuring CERest App
+Steps
+1.	Install new application using CERest.ear. Choose fast path track. Edit app name to CERest.
+2.	In WAS Admin console, start the application CERest
+3.	In WAS Admin console, review the following settings:
+Applications > Application Types > WebSphere enterprise application > CERest > Class loading and update detection
+ 
+
+4.	On the Custom Server, do the following:
+Create folder:
+mkdir -p /lotus/ds2/lotusapp/CERest/properties
+Copy the properties file to /lotus/ds2/lotusapp/CERest/properties
+DMS_AO.properties
+hystrix_config.properties
+kafkaProducer.properties
+log4j.properties
+ObjectClassMapping.properties
+Edit the properties file DMS_AO.properties:
+FileNetStanzaname=FileNetP8
+FileNetURI=corbaloc::digifilprodapppf01:9810,:digifilprodapppf02:9810,:digifilprodapppf03:9810/cell/clusters/CPESBILOTUS/FileNet/Engine
+DomainName=DIGILOTUS_PROD
+ObjectStoreName=DIGI_PROD_OS1
+api_user=ZGlnaV9nY2RfcHJvZA==
+api_pass=UGFzc3dvcmRAMTIzNDU=
+p8_user=ZGlnaV9nY2RfcHJvZA==
+p8_pass=UGFzc3dvcmRAMTIzNDU=
+peengineurl=https://cpe.sbiintouch.in:443/peengine/P8BPMREST/p8/bpm/v1/
+
+Note: CERest app was unable to start so we did the following settings that we had done on non-PROD setup. But these settings were not there on existing PROD setup.
+
+< All Custom servers and DigiWat servers > > Java and Process Management > Process definition > Java Virtual Machine > 
+Generic JVM arguments
+-Dcom.sun.jndi.ldap.connect.pool.timeout=300000 -Dcom.sun.jndi.ldap.connect.pool.protocol="plain" -Djaxws.payload.highFidelity=true -Dcom.ibm.ws.cache.CacheConfig.showObjectContents=true -Dcom.sun.jndi.ldap.object.disableEndpointIdentification=true -Dlog4j1.compatibility=true -Djdk.xml.xpathExprGrpLimit=0 -Djdk.xml.xpathExprOpLimit=0 -Djdk.xml.xpathTotalOpLimit=0
+
+< All Custom servers and DigiWat servers > > Java and Process Management > Process definition > Java Virtual Machine > 
+Custom Properties
+com.ibm.ws.cache.CacheConfig.createCacheAtServerStartup	true
+com.ibm.ws.cdi.enableImplicitBeanArchives				false
+
+
+
+
+ 
+Configuring Other Custom Apps
+1.	In WAS Admin console, make the following settings:
+<All Custom servers and DigiWat servers> > Java and Process Management > Process definition > 
+Java Virtual Machine
+Initial heap size		16384
+Maximum heap size		16384
+
+< All Custom servers > > Java and Process Management > Process definition > Java Virtual Machine > 
+Generic JVM arguments
+For DC CustomServer1 add:
+-Dam.wascell=digifilprodappcustns01Cell01 -Dam.wasprofile=CustomServer1 -Dam.wasnode=digifilprodappcustns01Node01 -Dam.wasserver=CustomServer1 -Ddb2.jcc.override.timerLevelForQueryTimeOut=2
+For DC CustomServer2 add:
+-Dam.wascell=digifilprodappcustns01Cell01 -Dam.wasprofile=CustomServer2 -Dam.wasnode=digifilprodappcustns02Node01 -Dam.wasserver=CustomServer2 -Ddb2.jcc.override.timerLevelForQueryTimeOut=2
+For DC CustomServer3 add:
+-Dam.wascell=digifilprodappcustns01Cell01 -Dam.wasprofile=CustomServer3 -Dam.wasnode=digifilprodappcustns03Node01 -Dam.wasserver=CustomServer3 -Ddb2.jcc.override.timerLevelForQueryTimeOut=2
+
+For DR CustomServer1 add:
+-Dam.wascell=digifilprodappcustdr01Cell01 -Dam.wasprofile=CustomServer1 -Dam.wasnode=digifilprodappcustdr01Node01  -Dam.wasserver=CustomServer1 -Ddb2.jcc.override.timerLevelForQueryTimeOut=2
+For DR CustomServer2 add:
+-Dam.wascell=digifilprodappcustdr01Cell01 -Dam.wasprofile=CustomServer2 -Dam.wasnode=digifilprodappcustdr02Node01  -Dam.wasserver=CustomServer2 -Ddb2.jcc.override.timerLevelForQueryTimeOut=2
+For DR CustomServer3 add:
+-Dam.wascell=digifilprodappcustdr01Cell01 -Dam.wasprofile=CustomServer3 -Dam.wasnode=digifilprodappcustdr03Node01  -Dam.wasserver=CustomServer3 -Ddb2.jcc.override.timerLevelForQueryTimeOut=2
+ 
+< All Custom servers > > Java and Process Management > Process definition > Java Virtual Machine > 
+Custom Properties
+com.ibm.websphere.security.util.authCacheEnabled	BasicAuthDisabled	Password caching should be disabled
+com.ibm.websphere.orb.uniqueServerName		true  
+timeoutValueInSSLClosingHandshake				5
+ 
+ 
+< All DigiWat servers > > Java and Process Management > Process definition > Java Virtual Machine > 
+Custom Properties
+com.ibm.websphere.security.util.authCacheEnabled	BasicAuthDisabled	Password caching should be disabled
+com.ibm.ws.cache.CacheConfig.batchUpdateMilliseconds		1  
+com.ibm.ws.cache.CacheConfig.cacheEntryWindow			50  
+com.ibm.ws.cache.CacheConfig.cacheInvalidateEntryWindow	50  
+com.ibm.ws.cache.CacheConfig.cacheInvalidatePercentWindow	2%  
+com.ibm.ws.cache.CacheConfig.cachePercentageWindow		2%  
+com.ibm.ws.cache.CacheConfig.createCacheAtServerStartup	true  
+com.ibm.ws.cache.CacheConfig.filterInactivityInvalidation	true  
+com.ibm.ws.cache.CacheConfig.filterLRUInvalidation		true  
+com.ibm.ws.cache.CacheConfig.filterTimeOutInvalidation	true  
+com.ibm.ws.cache.CacheConfig.ignoreValueInInvalidationEvent	true  
+com.ibm.ws.cache.CacheConfig.showObjectContents			true
+
+ 
+<All Custom servers> > Additional properties > Thread pools > 
+WebContainer 	100  750
+<All DigiWat servers> > Additional properties > Thread pools >
+WebContainer 	50  750
+
+<All Custom servers and DigiWat servers> > Environment > Shared libraries 
+	Note: Scope should be cell.
+LogbackKafkaSharedLib   /lotus/data03/LogbackKafkaSharedLib
+SBILotusSharedLib		/lotus/data03/SBILotusSharedLib
+Videokyc			/lotus/data03/videokyc
+ 
+
+[All DigiWat servers] Environment > Replication domains
+DigiWatCluster
+ 
+
+<All DigiWat servers> > Container Settings > Container Services > Dynamic cache service
+ 
+
+<All DigiWat servers> > Resources > Cache instances > Object cache instances
+	Note: Scope should be cluster.
+sbilotusMastersCache	services/cache/mastersCache
+sbilotuscache		services/cache/responseCache 
+
+ 
+ 
+
+
+com.ibm.ws.cache.CacheConfig.showObjectContents		true
+
+ 
+
+<All Custom servers and DigiWat servers> Copy the /portal folder with all its relevant contents.
+ 
+
+ 
+
+ 
