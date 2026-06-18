@@ -1,0 +1,52 @@
+mkdir db2uat
+[db2inst1@digifiluatdb01 db2inst1]$ mv FILENET_UAT_EXTRACTION_NEW.tar db2uat
+[db2inst1@digifiluatdb01 db2inst1]$ cd db2uat/
+[db2inst1@digifiluatdb01 db2uat]$ ll
+total 1364652
+-rw-r----- 1 db2inst1 db2iadm1 1397401600 Oct 29 13:17 FILENET_UAT_EXTRACTION_NEW.tar
+[db2inst1@digifiluatdb01 db2uat]$ tar -xvf FILENET_UAT_EXTRACTION_NEW.tar
+
+cd FILENET_UAT_EXTRACTION_NEW/ACTSTMT/OBJ_01
+db2move ACTSTMT import
+vi digiobj1.import.out
+[db2inst1@digifiluatdb01 FILENET_UAT_EXTRACTION_NEW]$ for i in DIGIFSS DIGILOAN DIGIPPIC; do cd $i/OBJ_01; db2move $i import | tee $i.import.out; cd ../../; done
+
+grep Rejected DIGIFSS/OBJ_01/DIGIFSS.import.out |more
+cat digippic.out |grep -i rejected
+db2move DIGIPPIC import |tee digippic.out
+
+
+FOR CREATING DDL  full 
+
+Db2 connect to DIGIOBJ1 user obj_01 using obj_01
+db2look -d DIGIOBJ1 -createdb -x -l -e -a -o  SBI_TEST_ddl_full.sql
+
+If you want to review each change before applying 
+:%s/DIGIOBJ1/SBI_TEST/gc
+
+
+
+db2 list tables for all|grep -i gcd
+db2 describe table GCD.FNGCD
+db2 select CODE_VERSION from GCD.FNGCD
+
+
+For DB backup:- 
+
+db2 force applications all
+db2 backup database digiicn to /lotus/fn/db2inst1/db2backup
+
+
+For DB Restore:- 
+db2 restore db digiicn
+
+DB BACKUP:-
+db2 force applications all; for db in `db2 list db directory | grep alias | cut -f2 -d"=" | xargs `; do echo backing up $db;db2 backup db $db; done
+
+ICN TABLE DROP
+for i in `db2 connect to digiicn>/dev/null;db2 -x list tables for schema icn|cut -f1 -d" "`; do  db2 drop table icn.$i; done
+
+
+UTILITY BACKGROUND
+db2top -d (dbname)
+
