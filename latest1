@@ -1,0 +1,53 @@
+Enterprise [direct: mongos] sbi_loans> db.sbi_agri_gold_loan.find({"payLoad.loanStatus":"submitted"}).count()
+390
+Enterprise [direct: mongos] sbi_loans> db.sbi_agri_gold_loan.find({"payLoad.loanStatus":"submitted",effectiveDate: '20241213'}).count()
+274
+Enterprise [direct: mongos] sbi_loans> db.sbi_agri_gold_loan.find({"payLoad.loanStatus":"submitted",effectiveDate: '20241214'}).count()
+46
+Enterprise [direct: mongos] sbi_loans> db.sbi_agri_gold_loan.find({"payLoad.loanStatus":"submitted",effectiveDate: '20241215'}).count()
+70
+Enterprise [direct: mongos] sbi_loans> db.sbi_agri_gold_loan.find({"payLoad.loanStatus":"submitted",effectiveDate: '20241215'}).limit(1)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Enterprise SBI_AO> db.sbi_ao_oct_2024.find({"data.personalDetails.address":{$elemMatch:{pincode: '475685',locality: 'Sunari'}}}).count()
+db.sbi_ao_mar_2025.find({"createdDate":[{"$gte":"13/03/2025 00:00:00"}]],[{"$lte":"13/03/2025 23:59:59"}]}).limit(5)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\\\
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++sbi_rtxc_loans+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303"}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq":"NONDDESUBMITTED"}}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq":"SUBMITTED"}}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq": "DISBURSED" }}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq": "DISBURSEFAILED" }}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq":"PENDING"}}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq":"INITIATE"}}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq":"FAILED"}}).count()
+db.sbi_rtxc_loan.find({"effectiveDate":"20250303","payLoad.appStatus": { "$eq":"NESLINITIATED"}}).count()
+++++++++++++++++++++++++++++++++++++++++++++++++++sbi_gi_pai_policy +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+mongoexport --db sbi_fss --collection sbi_gi_pai_policy --type=CSV --uri "mongodb://V1017592@digiproddcmongos02.sbiyono.sbi:27028/?authMechanism=PLAIN&authSource=%24external&tls=true&tlsCAFile=/etc/ssl/certs/root-ca.cer" --fieldFile=data.txt --query='{"renewalDate":{"$gte":"2025-04-01T00:00:00.000+05:30","$lte":"2025-04-31T11:59:59.999+05:30"}}' --out APRIL_2025.csv
+ mongoexport --db sbi_fss --collection sbi_gi_pai_policy --type=CSV --uri "mongodb://V1017592@digiproddcmongos02.sbiyono.sbi:27028/?authMechanism=PLAIN&authSource=%24external&tls=true&tlsCAFile=/etc/ssl/certs/root-ca.cer" --fields="renawalPaymentRefNo" --query='{"effectiveDate":{"$gte":"20250306","$lte":"20250309"}}' --out test1.csv
+++++++++++++++++++++++++++++++++++++++++++++++++  TOTAL NO.OF PAI POLICIES ELIGIBLE FOR RENEWAL      (Not Started)++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+db.sbi_gi_pai_policy.find({"renewalDateDt": { "$gte": ISODate("2025-03-01T00:00:00Z"), "$lte": ISODate("2025-03-01T23:59:59Z") }, "autoRenew": "true","renewalPaymentStatus": { "$in": [ 'Not Started' ] } }).count()
+++++++++++++++++++++++++++++++++++++++++++++++++NO.OF PAI POLICIES UNPROCESSED(Failed/ Not Started)++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+db.sbi_gi_pai_policy.find({"renewalDateDt": { "$gte": ISODate("2025-03-01T00:00:00Z"), "$lte": ISODate("2025-03-01T23:59:59Z") }, "autoRenew": "true","renewalPaymentStatus": { "$in": [ 'Not Started', 'failed', 'Failed' ] } }).count()
+ db.sbi_gi_pai_policy.find({"renewalDateDt": { "$gte": ISODate("2025-03-17T00:00:00Z"), "$lte": ISODate("2025-03-17T23:59:59Z") }, "autoRenew": "true","renewalPaymentStatus": { "$in": [ 'Failed', 'failed' ] } }).count()
+ mongoexport --db sbi_fss --collection sbi_gi_pai_policy --type=json --uri "mongodb://V1017592@digiproddcmongos02.sbiyono.sbi:27028/?authMechanism=PLAIN&authSource=%24external&tls=true&tlsCAFile=/etc/ssl/certs/root-ca.cer" --fields='renewalPaymentStatus,renewalPaymentDate,reprocessedCount,renewalPaymentFailedMsg,policyValidUntil,renewalDate,fundTransferStatus,transactionStatus,giPosted' --query='{"effectiveDate":{"$gte":"20250301","$lte":"20250306"}}' --out export_010325-060325.json
+Enterprise [direct: mongos] sbi_fss> db.sbi_gi_pai_policy.find({"effectiveDate":"20250301","renewalPaymentStatus": { "$eq":"SUCCESS"}}).count()
+1108
+Enterprise [direct: mongos] sbi_fss> db.sbi_gi_pai_policy.find({"effectiveDate":"20250301","renewalPaymentStatus": { "$eq":"Not Started"}}).count()
+66
+Enterprise [direct: mongos] sbi_fss> db.sbi_gi_pai_policy.find({"effectiveDate":"20250301","renewalPaymentStatus": { "$eq":"Failed"}}).count()
+70
+Enterprise [direct: mongos] sbi_fss> db.sbi_gi_pai_policy.find({"effectiveDate":"20250301","renewalPaymentStatus":null}).count()
+26380
+Total 
+Enterprise [direct: mongos] sbi_fss> db.sbi_gi_pai_policy.find({"effectiveDate":"20250301"}).count()
+27624
+Enterprise sbi_fss> db.sbi_fss_queue_1q_2025.find({"_id":/^_design/}).count()  = 14
+Enterprise sbi_fss> db.sbi_gi_1q_2025.find({"_id":/^_design/}).count() =10
+Enterprise sbi_fss> db.sbi_gi_new_policy.find({"_id":/^_design/}).count() =26
+Enterprise sbi_fss> db.sbi_gi_policy.find({"_id":/^_design/}).count() =14
+Enterprise sbi_fss> db.sbi_gli_1q_2025.find({"_id":/^_design/}).count() =5
+Enterprise sbi_fss> db.sbi_pai_portal_feb_2025.find({"_id":/^_design/}).count() =2
+Enterprise sbi_fss> db.sbi_risk_analysis_1q_2025.find({"_id":/^_design/}).count() =8
+sbi_fss.sbi_gi_new_policy
+mongoexport --db sbi_fss --collection sbi_gi_pai_policy --type=json --fields="renewalPaymentRefNo" --query=
+mongoexport --db sbi_masters --collection sbi_master --type=json --uri "mongodb://V1017592@digiproddcmongos02.sbiyono.sbi:27028/?authMechanism=PLAIN&authSource=%24external&tls=true&tlsCAFile=/etc/ssl/certs/root-ca.cer" --query='{"_id": ObjectId("fdInterestRate")}' --out omkar.json
