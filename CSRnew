@@ -1,0 +1,234 @@
+Openssl COmmands
+
+openssl req -new -newkey rsa:2048 -sha256 -nodes -out **********.csr -keyout *************.key
+
+openssl pkcs7 -in ********.p7b -print_certs -out ********.pem
+
+openssl pkcs12 -export -out ********.p12 -in ********.pem -inkey ********.key
+
+
+
+¬¬¬¬¬¬
+
+
+
+
+
+
+
+
+Cloudant Certificate Renewal Activity: SOP
+¬¬¬¬¬¬								Version 1.3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Contents
+Revision History:	3
+PURPOSE INFORMATION:	4
+SCOPE:	4
+DEFINITION:	4
+PREPARATION:	4
+IMPLEMENTATION:	7
+Rollback Plan:	9
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Revision History:
+Document Version #	Revision Date	Prepared By	Approved By	Approval Date	Summary of Changes
+1.3	21-05-2025	Amit Kumar	Haresh Prasad		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PURPOSE INFORMATION:
+To establish a standardized procedure for renewing SSL certificates across all applications and domains within the organization.
+SCOPE:
+This document outlines the standard procedure for renewing SSL certificates used to secure server connections. Renewing certificates is crucial for maintaining secure connections and ensuring user trust. The scope of this SOP covers the entire renewal process, from generating a CSR to deploying the new certificate.
+DEFINITION:
+Certificate Signing Request (CSR): A CSR, or Certificate Signing Request, is a formal request to a Certificate Authority (CA) for an SSL/TLS certificate. It contains information that the CA uses to issue a certificate, including the public key and details about the requesting organization.
+
+Secure Sockets Layer (SSL): SSL, or Secure Sockets Layer, is a security protocol that establishes an encrypted connection between a server and a client, typically a web browser. This encryption protects the sensitive data exchanged during online transactions, making it a crucial technology for secure websites and online communications.
+PREPARATION:
+•	Raise Change Request: Raise a change request (CR) to take the approval from the bankers before applying the latest fix pack or initiating the SSL renewal activity.
+•	Review Current Certificate Details: Note the domain name, organization, and any specific requirements of the current certificate.
+1.	Determine the expiration date of the current SSL certificate.
+ 
+
+
+
+
+•	Raise the certificate and download the signer certificate: Raise the certificate and download the signer certificate which is approved by Banker.
+
+Details:
+CERT : util.sbiintouch.in
+DC	DR
+10.189.179.10	10.176.194.143
+10.189.179.11	10.176.194.142
+10.189.179.153	10.176.194.139
+10.189.179.160	10.176.194.137
+10.189.179.162	10.176.194.138
+
+DC Console: https://10.189.179.160:9043/ibm/console
+DR Console: https://10.176.194.137:9043/ibm/console
+
+Note : The certificate util.sbiintouch.in is to renewed only for Cloudant  servers.
+
+The certificate is same for all DC and DR servers. 
+1.	Used the command generate the CSR file :
+openssl req -new -newkey rsa:2048 -sha256 -nodes -out /lotus/data01/opt/IBM/certNew/ utilsbiintouch.csr -keyout /lotus/data01/opt/IBM/utilsbiintouch.key
+
+2.	Go to the SBI portal https://10.189.38.127/certsrv/ .
+3.	Now go to request a certificate 
+ 
+
+
+
+4.	Go to  Submit a certificate request by using a base – 64-encoded CMC or PKCS #10 file , or submit a renewal request by using a base -64 – encoded PKCS #7 file. (As shown in the below Screenshot)
+ 
+5.	Step 4): -
+Once we go on the mentioned link. A form will get opened. 
+Now open the CSR file which we had generated previously. 
+Copy the CSR key and paste it in base -64-encoded certificate request area.
+Note that – CSR key to be copied exactly in a way mentioned in the below screenshot 
+Even single extra Space will make the entire process fail.
+
+ 
+
+ 
+
+Step 5): -
+After the certificate request is submitted, a request id is generated. Note down the request ID and take a screenshot of the same. Send an email to bank team to approve the request. After 2 hours and within 24 hours, download the certificate.
+
+Certificate renewal Steps:
+We want to import the certificate util.sbiintouch.in for all servers. 
+
+Used for Command and Path:
+Path: /lotus/data01/opt/IBM/WebSphere/AppServer/java/jre/bin
+Command: keytool -list -v -keystore /lotus/data01/opt/IBM/WebSphere/Certs/NewCert/util.sbiintouch.in.p12 -storetype PKCS12 -storepass WebAS
+
+Below snap for reference
+ 
+
+•	Backup of existing SSL Certificate: Take the backup of existing SSL certificate which is going to be expired 
+
+Backup Path for existing Certificate: 
+/lotus/data01/opt/IBM/WebSphere/Certs
+Backup Command : cp -rp NewCert NewCert_ddmmyy.
+
+ 
+IMPLEMENTATION: 
+	Once the change request (CR) is approved, we start the actual implementation. Below are the detailed steps to implement the SSL certificate renewal activity.
+
+1.	We will generate the key.p12 for the certificate using below commands. 
+The below mentioned commands will convert the .p7b to .pem . 
+•	openssl pkcs7 -in ********.p7b -print_certs -out ********.pem
+	The below command will convert the .key to .p12 format.
+•	openssl pkcs12 -export -out ********.p12 -in ********.pem -inkey ********.key
+
+2.	After getting certificate we will take back up of cell level key.p12, trust.p12 & security.xml file from all Cloudant DC & DR servers.
+•	Make sure take backup for digiwasprod-appCell01.
+•	Path for security.xml :     /lotus/data01/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/digiwasprod-appCell01
+
+ 
+•	Make sure take backup for util.sbiintouch.in.p12.
+Path: /lotus/data01/opt/IBM/WebSphere/Certs/NewCert
+•	Also take backup of trust.p12 and key.p12 from node level.
+Path:/lotus/data01/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/digiwasprod-appCell01/nodes
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+   
+3.	We will import the new certificate in all Cloudant app server key.p12 file or in console directly.
+
+4.	Key.p12 & trust.p12 is referring only one .p12 file which is from below path :
+/lotus/data01/opt/IBM/WebSphere/Certs/NewCert/util.sbiintouch.in.p12
+
+Path in console: SSL certificate and key management > Key stores and certificates > CellDefaultKeyStore > Personal certificates
+
+DC : https://10.189.179.160:9043/ibm/console
+DR: https://10.176.194.137:9043/ibm/console
+
+ 
+
+5.	We will delete the old certificate by doing it with replace option in console with new certificate.
+6.	The certificate will also be renewed in all node levels in the console.
+Path: SSL certificate and key management > Key stores and certificates > NodeDefaultTrustStore > Personal certificates
+
+ 
+
+7.	We will take restart of server one by one and check. If it running successfully then we will go ahead with other servers.
+8.	Check services are working fine with SDO Team. Also check the date of expiry of the certificates from the console.
+
+
+	We will be doing the same in DC as well after successful completion of DR.
+Rollback Plan:
+1.	Login to the DR Cloudant Console https://10.176.194.59:9043/ibm/console
+2.	Restore the backup of key.p12, trust.p12 and security.xml from cell and node level and configure the old certificate in place of the new one.
+•	Cell Level Path: :/lotus/data01/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/digiwasprod-appCell01/
+•	Node Level Path: :/lotus/data01/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/digiwasprod-appCell01/nodes 
+3.	Take restart of servers. Also check the date of expiry of the certificates from the console. 
+4.	Check services are working fine from SDO team.
+
+
+
+
