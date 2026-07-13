@@ -1,0 +1,74 @@
+####################################################################################################################################################
+bsondump --outFile sbi_gi_pai_policy.json sbi_gi_pai_policy.bson
+###############################################################################
+txt import
+1.	Open BranchMaster.xlsx
+2.	Delete first line (having column names), as column names are being passed explicitely using branchMasterFields.txt
+3.	Save file as BranchMaster.csv
+4.	Create a fieldFile as branchMasterFields.txt
+	vi branchMasterFields.txt
+	_id.string()
+	BRCODE.string()
+	BRANCH_NAME.string()
+	CIRCD.string()
+	CIRCLE.string()
+	NETWORK.string()
+	MODCD.string()
+	MODULE.string()
+	REGION.string()
+	POPCD.string()
+	POPULATION.string()
+	DOP.string()
+	OFFCODE.string()
+	OFFICETYPE.string()
+	ADMN.string()
+	INCM.string()
+	STATECD.string()
+	STATE.string()
+	DISTCD.string()
+	DISTRICT.string()
+	ADDR1.string()
+	ADDR2.string()
+	ADDR3.string()
+	PINCODE.string()
+	STD.string()
+	PHONE.string()
+	FAX.string()
+	MOBNO.string()
+	TIER.string()
+	MICR.string()
+	CENTRECD.string()
+	CENTERNAME.string()
+	EMAIL.string()
+	BMCELL.string()
+	PFINDEX.string()
+	DCOTYPE.string()
+	LATITUDE.string()
+	LONGITUDE.string()
+	VKYCBRCODE.string()	
+5.	Ensure both BranchMaster.csv and branchMasterFields.txt are in same location	
+6.	Import with mongoimport 
+		mongoimport --type CSV --db <dbName> --collection <collectionName> --uri "mongodb://<ADID>@digiproddrmongodinv.sbiyono.sbi:27040/?authMechanism=PLAIN&authSource=%24external&tls=true&tlsCAFile=/etc/ssl/certs/root-ca.cer" --columnsHaveTypes --fieldFile=branchMasterFields.txt --file BranchMaster.csv
+	Where, 	<dbName> Database name in which to import
+			<collectionName> Collection name in which to import
+			<ADID> AD ID
+###################################################################################
+db.coll.aggregate([
+{
+ $match:{
+effectiveDate:{{"$gte":"20250106","$lte":"20250108"}}
+}
+},
+{
+$group:{
+  _id:null,
+  totalSum: {$sum: "$yourField"}
+}
+}
+ ])
+
+-----------------------------------------------------------------
+
+db.April2024.aggregate([{"$match":"effectiveDate":{{"$gte":"20240401","$lte":"20240430"}}},{$group:{_id:null,{"totalSum": {"$sum": "$sumInsured"}}}}])
+
+db.April2024.aggregate([{"$match":{"effectiveDate":{"$gte":"20240401","$lte":"20240430"}},$group:{_id:null,{"totalSum": {"$sum": "$sumInsured"}}])
