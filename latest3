@@ -1,0 +1,19 @@
+
+--limited audiences
+
+Please find script for the reference.
+-------------------------------------------------------------------------------------------------
+Step 1: Create fieldFile with fields contents - VKYC_PAN_face_match.txt
+-------------------------------------------------------------------------------------------------
+_id
+data.refNo
+data.cifNumber
+data.appliStartDate
+data.appliSubmitDate
+data.personalDetails.panName
+data.vkyc.aadharPhotoMatch
+data.vkyc.panPhotoMatch
+data.vkyc.vkycPanName
+data.vkyc.vkycDate
+data.vkyc.vkycScheduleStartTime
+data.vkyc.vkycScheduleEndTime
