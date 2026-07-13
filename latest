@@ -1,0 +1,26 @@
+#Define database names
+
+echo "Job start time = `date` "
+
+
+databases=(
+"sbi_lotus"
+)
+
+# Loop through each database and perform the curl command
+for db in "${databases[@]}"; do
+
+    # Prepare the curl command
+    curl -X GET -u cloudant_metrics:Pr@tham@q1 "http://digdr-cdntprodlb.corp.ad.sbi/$db/_all_docs?include_docs=true" > "${db}.json"
+
+    # Check if the curl command was successful
+    if [ $? -eq 0 ]; then
+        echo "Data exported for database: $db to ${db}.json"
+    else
+        echo "Failed to export data for database: $db"
+    fi
+done
+
+
+echo "Job end time = `date` "
+
