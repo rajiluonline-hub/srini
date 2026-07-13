@@ -1,0 +1,471 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<server description="new server">
+<!--  Enable features  -->
+<featureManager>
+<feature>jsp-2.2</feature>
+<!--  Begin of features added by IBM MobileFirst <installmobilefirstadmin> ant task for context root '/mfpadmin'.  -->
+<!--  The following lines will be removed when the application is uninstalled  -->
+<feature>jdbc-4.0</feature>
+<feature>appSecurity-2.0</feature>
+<feature>restConnector-1.0</feature>
+<feature>usr:MFPDecoderFeature-1.0</feature>
+<!--  End of features added by IBM MobileFirst <installmobilefirstadmin> ant task for context root '/mfpadmin'.  -->
+<!--  Begin of features added by IBM MobileFirst <installmobilefirstruntime> ant task for context root '/mfp'.  -->
+<!--  The following lines will be removed when the application is uninstalled  -->
+<feature>jdbc-4.0</feature>
+<feature>servlet-3.0</feature>
+<feature>ssl-1.0</feature>
+<feature>usr:MFPDecoderFeature-1.0</feature>
+<!--  End of features added by IBM MobileFirst <installmobilefirstruntime> ant task for context root '/mfp'.  -->
+<!--  Begin of features added by IBM MobileFirst <installPush> ant task for context root '/imfpush'.  -->
+<!--  The following lines will be removed when the application is uninstalled  -->
+<feature>jdbc-4.0</feature>
+<feature>servlet-3.0</feature>
+<feature>ssl-1.0</feature>
+<feature>usr:MFPDecoderFeature-1.0</feature>
+<!--  End of features added by IBM MobileFirst <installPush> ant task for context root '/imfpush'.  -->
+<feature>jndi-1.0</feature>
+<!--  Dynache for MFP  -->
+<feature>webCache-1.0</feature>
+<feature>webCacheMonitor-1.0</feature>
+<feature>distributedMap-1.0</feature>
+<!--  Dynache for MFP  -->
+<!--  Begin of features added by IBM MobileFirst installer.  -->
+<!--  The following lines will be removed when the application is uninstalled  -->
+<feature>jdbc-4.0</feature>
+<feature>servlet-3.0</feature>
+<feature>appSecurity-2.0</feature>
+<feature>usr:MFPDecoderFeature-1.0</feature>
+<!--  End of features added by IBM MobileFirst installer.  -->
+<!--  Enable Spring boot feature  -->
+<feature>springBoot-1.5</feature>
+<feature>servlet-4.0</feature>
+</featureManager>
+<!--  Begin of Dynache for MFP  -->
+<distributedMap id="services/cache/mfpdynacache" jndiName="services/cache/mfpdynacache" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpdynacache0" jndiName="services/cache/mfpdynacache0" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpdynacache1" jndiName="services/cache/mfpdynacache1" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpdynacache2" jndiName="services/cache/mfpdynacache2" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpdynacache3" jndiName="services/cache/mfpdynacache3" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpdynacache4" jndiName="services/cache/mfpdynacache4" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpdynacache5" jndiName="services/cache/mfpdynacache5" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpaocache" jndiName="services/cache/mfpaocache" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/otp" jndiName="services/cache/otp" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpprelogincache" jndiName="services/cache/mfpprelogincache" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/mfpompcache" jndiName="services/cache/mfpompcache" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="true" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/yfeicache" jndiName="services/cache/yfeicache" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="false" sizeInGB="2"/>
+</distributedMap>
+<distributedMap id="services/cache/yfeidynacache" jndiName="services/cache/yfeidynacache" memorySizeEntries="1000" createCacheAtServerStartup="true">
+<diskCache flushToDiskOnStopEnable="false" sizeInGB="2"/>
+</distributedMap>
+<!-- End of  Dynache for MFP  -->
+<!--  To access this server from a remote client add a host attribute to the following element, e.g. host="*"  -->
+<httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443" host="*">
+<!--  Option soReuseAddr added by IBM MobileFirst <installmobilefirstadmin> ant task for context root '/mfpadmin'.  -->
+<!--  Option soReuseAddr added by IBM MobileFirst <installmobilefirstruntime> ant task for context root '/mfp'.  -->
+<!--  Option soReuseAddr added by IBM MobileFirst <installPush> ant task for context root '/imfpush'.  -->
+<!--  Option soReuseAddr added by IBM MobileFirst installer.  -->
+<tcpOptions soReuseAddr="true"/>
+</httpEndpoint>
+<!--  manual insertion for plugins generation  -->
+<pluginConfiguration webserverPort="8080" webserverSecurePort="80" sslKeyRingLocation="security/Mobile-sit.kdb" sslStashfileLocation="security/Mobile-sit.sth" sslCertLabel="default"/>
+<!--  Automatically expand WAR files and EAR files  -->
+<applicationManager autoExpand="true"/>
+<!--     IBM MobileFirst requires SSL and declared the "defaultKeyStore" default keystore. 
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+    This configuration is the minimum one that you need to create an SSL configuration.
+    With this configuration, the Liberty server creates the keystore and the certificate, 
+    if it does not exist yet, during the SSL initialization.
+    The created certificate is a self-signed certificate that is valid for 365 days.
+    Do not use the certificates that the Liberty server created for production use.
+    For more information see  http://pic.dhe.ibm.com/infocenter/wasinfo/v8r5/topic/com.ibm.websphere.wlp.core.doc/ae/twlp_sec_ssl.html 
+     -->
+<keyStore id="defaultKeyStore" location="/mfp/IBM/WebSphere/Liberty/usr/servers/mfpsit01/resources/security/key.jks" password="mobilefirst"/>
+<!--  Define the default SSL configuration to use  -->
+<sslDefault sslRef="defaultSSLConfig"/>
+<!--  Define the new SSL Configuration to use  -->
+<ssl id="newSSLSettings" keyStoreRef="defaultKeyStore" enabledCiphers="TLS_RSA_WITH_AES_256_CBC_SHA256 SSL_RSA_WITH_AES_256_CBC_SHA256"/>
+<ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" sslProtocol="TLSv1.2"/>
+<!--  securityLevel="CUSTOM" enabledCiphers="TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA256 "  -->
+<administrator-role>
+<!--     MobileFirst JMX User.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+         -->
+<user>MfpRESTUser</user>
+</administrator-role>
+<!--     MobileFirst JNDI property for JMX connection.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+     -->
+<jndiEntry jndiName="mfp.admin.jmx.host" value=""localhost""/>
+<!--     MobileFirst JNDI property for JMX connection.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+     -->
+<jndiEntry jndiName="mfp.admin.jmx.port" value=""9443""/>
+<!--     MobileFirst JNDI property for JMX connection.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+     -->
+<jndiEntry jndiName="mfp.admin.jmx.user" value=""MfpRESTUser""/>
+<!--     MobileFirst JNDI property for JMX connection.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+     -->
+<jndiEntry jndiName="mfp.admin.jmx.pwd" value=""kurFnxWZduxA""/>
+<!--     MobileFirst JNDI property for JMX connection.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+     -->
+<jndiEntry jndiName="mfp.topology.platform" value=""Liberty""/>
+<!--     MobileFirst JNDI property for JMX connection.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+     -->
+<jndiEntry jndiName="mfp.topology.clustermode" value=""Standalone""/>
+<basicRegistry>
+<!--     IBM Application Center group.
+        [Added by IBM MobileFirst Platform Foundation <installapplicationcenter> Ant task for context root '/applicationcenter'] 
+         -->
+<group name="appcentergroup">
+<!--     IBM Application Center group member.
+            [Added by IBM MobileFirst Platform Foundation <installapplicationcenter> Ant task for context root '/applicationcenter'] 
+             -->
+<member name="admin"/>
+</group>
+<!--     MobileFirst user.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+         -->
+<user name="configUser_mfpadmin" password="admin"/>
+<!--     MobileFirst user.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+         -->
+<user name="MfpRESTUser" password="kurFnxWZduxA"/>
+<!--     MobileFirst user.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+        [Added by IBM MobileFirst Platform Foundation <installapplicationcenter> Ant task for context root '/applicationcenter'] 
+         -->
+<user name="admin" password="admin"/>
+</basicRegistry>
+<!--     WebContainer statement.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstruntime> Ant task for context root '/mfp'] 
+        [Added by IBM MobileFirst Platform Foundation <installPush> Ant task for context root '/imfpush'] 
+     -->
+<!--  com.ibm.ws.webcontainer.suppressErrorPageODRHeader is added to suppress $WSEP header in the response  -->
+<webContainer deferServletLoad="false" disableXPoweredBy="true" com.ibm.ws.webcontainer.suppressErrorPageODRHeader="true"/>
+<!--     Shared JDBC Driver.
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstadmin> Ant task for context root '/mfpadmin'] 
+        [Added by IBM MobileFirst Platform Foundation <installmobilefirstruntime> Ant task for context root '/mfp'] 
+        [Added by IBM MobileFirst Platform Foundation <installPush> Ant task for context root '/imfpush'] 
+     -->
+<library id="MobileFirst/JDBC/db2">
+<fileset dir="${shared.resource.dir}/MobileFirstJDBC/db2" includes="db2jcc4.jar"/>
+</library>
+<library id="MFPAdaptersLib">
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commomnsHTTPClient-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-codec-1.10.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-lang-2.6.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commonsLogging-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="gson-2.8.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="guava-19.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="ibmpkcs-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="ImageSanitization-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="interact-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jjwt-0.6.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="JSON4J_Apache-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jsoup-1.10.2.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="KafkaProducer-1.2.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="log4j-1.2.17.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="logback-classic-1.1.2.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="logback-core-1.1.2.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="unicaCommons-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="unicaHelper-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jasperreports-6.0.0.jar"/>
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="xercesImpl-2.10.0.jar"/  -->
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="castor-1.2.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-beanutils-1.9.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-collections-3.2.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-digester-2.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-logging-1.1.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="ecj-4.3.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="itext-pdfa-5.5.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="itextpdf-5.5.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jackson-annotations-2.1.4.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jakarta-regexp-1.4.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jcommon-1.0.15.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jfreechart-1.0.12.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="lucene-analyzers-common-4.5.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="lucene-core-4.5.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="lucene-queries-4.5.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="lucene-queryparser-4.5.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="lucene-sandbox-4.5.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="olap4j-0.9.7.309-JS-3.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="cache-class-1.0.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="iPayPipe-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="cryptix-3.2.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="qrCore-1.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="qrJavase-1.0.1.jar"/>
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="kafka-clients-0.9.0.0.jar"/  -->
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="kafka-clients-2.2.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jackson-databind-2.8.5.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jackson-core-2.8.5.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="slf4j-api-1.7.7.jar"/>
+<!-- fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="Yono-mfp-common-1.0.0.jar"/ -->
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="httpclient-4.3.4.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="httpcore-4.3.2.jar"/>
+<!-- fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="bcprovjdk-1.0.1.jar"/ -->
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="yono-mfp-conf.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="hazelcast-5.1.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="hazelcast-enterprise-5.3.2.jar"/>
+<!-- Jars below added for Jasper Reports  -->
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="ant-1.7.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="antlr-2.7.5.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="barbecue-1.5-beta1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="barcode4j-2.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-anim.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-awt-util.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-bridge.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-css.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-dom.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-ext.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-gvt.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-parser.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-script.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-svg-dom.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-svggen.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-util.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="batik-xml.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="bcel-5.2.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="bsh-2.0b4.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="com.fasterxml.jackson.core.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="commons-javaflow-20060411.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="groovy-all-2.0.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="velocity-1.7-dep.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="hsqldb-1.8.0-10.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jasper-compiler-jdt-5.5.12.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jasperreports-fonts-6.0.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jasperreports-functions-5.6.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jasperreports-javaflow-6.0.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jaxen-1.1.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="joda-time-2.0.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jpa.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="jxl-2.6.10.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="mondrian-3.1.1.12687.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="pdfbox-1.8.8.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="png-encoder-1.5.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="poi-3.10.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="poi-ooxml-3.10.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="poi-ooxml-schemas-3.10.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="rhino-1.7R3.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="serializer.jar"/>
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="db2jcc.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="db2jcc4.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="dom4j-1.6.1.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="eclipse.jdt.springsource.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="hibernate3.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="saaj-api-1.3.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="servlet-api-2.4.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="spring-beans-2.5.5.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="spring-core-2.5.5.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="xalan-2.7.1.jar"/  -->
+<!--  fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="xml-apis.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="xml-apis-ext.jar"/>
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="xmlbeans-2.5.0.jar"/  -->
+<fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="sbi-lotus-prop-1.0.0.jar"/>
+<!-- <fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="mfp-security-checks-base-8.0.2016082422.jar"/> -->
+<!-- <fileset dir="${shared.resource.dir}/MFPAdaptersLib" includes="sbi-lotus-common-1.0.0.jar"/> -->
+</library>
+<!--  Begin of configuration added by IBM MobileFirst <installmobilefirstadmin> ant task for context root '/mfpadmin'.  -->
+<!--  Declare the MobileFirst Administration Service application.  -->
+<application id="authservice" name="authservice" location="AuthenticationService.war" type="war"/>
+<application id="mfpadmin" name="mfpadmin" location="mfp-admin-service.war" type="war">
+<application-bnd>
+<security-role name="mfpadmin">
+<user name="admin"/>
+</security-role>
+<security-role name="mfpdeployer"> </security-role>
+<security-role name="mfpmonitor"> </security-role>
+<security-role name="mfpoperator"> </security-role>
+</application-bnd>
+<classloader delegation="parentLast"> </classloader>
+</application>
+<!--  Declare the JNDI properties for the MobileFirst Administration Service.  -->
+<jndiEntry jndiName="mfpadmin/mfp.config.service.user" value=""configUser_mfpadmin""/>
+<jndiEntry jndiName="mfpadmin/mfp.config.service.password" value=""{xor}PjsyNjE=""/>
+<jndiEntry jndiName="mfpadmin/mfp.admin.push.url" value=""http://10.189.177.25:9080/imfpush""/>
+<jndiEntry jndiName="mfpadmin/mfp.admin.authorization.server.url" value=""http://10.189.177.25:9080/mfp""/>
+<jndiEntry jndiName="mfpadmin/mfp.push.authorization.client.id" value=""push-client-id""/>
+<jndiEntry jndiName="mfpadmin/mfp.push.authorization.client.secret" value=""pushSecret""/>
+<jndiEntry jndiName="mfpadmin/mfp.admin.authorization.client.id" value=""admin-client-id""/>
+<jndiEntry jndiName="mfpadmin/mfp.admin.authorization.client.secret" value=""adminSecret""/>
+<!--  (MV) 20180813: added for push service issue iFix  -->
+<jndiEntry jndiName="mfpadmin/mfp.licenseTracking.enabled" value=""false""/>
+<!--  Declare the IBM MobileFirst Administration database.  -->
+<dataSource jndiName="mfpadmin/jdbc/mfpAdminDS" transactional="false">
+<jdbcDriver libraryRef="MobileFirst/JDBC/db2"/>
+<properties.db2.jcc databaseName="MFPDATA" serverName="digifilsitdb01" portNumber="50001" user="mfpsch" password="{xor}EhkPLDw3OjI+bg==" currentSchema="MFPSCH"/>
+</dataSource>
+<!--  Declare the MobileFirst Administration Console application.  -->
+<application id="mfpconsole" name="mfpconsole" location="mfp-admin-ui.war" type="war">
+<application-bnd>
+<security-role name="mfpadmin">
+<user name="admin"/>
+</security-role>
+<security-role name="mfpdeployer"> </security-role>
+<security-role name="mfpmonitor"> </security-role>
+<security-role name="mfpoperator"> </security-role>
+</application-bnd>
+<classloader delegation="parentLast"> </classloader>
+</application>
+<!--  Declare the JNDI properties for the MobileFirst Administration Console.  -->
+<jndiEntry jndiName="mfpconsole/mfp.admin.endpoint" value=""*://*:*/mfpadmin""/>
+<!--  Declare the MobileFirst Server Artifacts application.  -->
+<application id="mfp-dev-artifacts" name="mfp-dev-artifacts" location="mfp-dev-artifacts.war" type="war">
+<classloader delegation="parentLast"> </classloader>
+</application>
+<!--  Declare the JNDI properties for the MobileFirst Server Artifacts.  -->
+<application context-root="doc" id="swagger-ui" location="mfp-server-swagger-ui.war" name="swagger-ui" type="war"/>
+<!--  JNDI for the swagger ui, so the admin console can present a link to open the adapter information in the swagger ui  -->
+<jndiEntry jndiName="mfpadmin/mfp.server.swagger.ui.url" value="/doc/?url=/<context>/api/adapterdoc/<adapterName>"/>
+<!--  Declare the MobileFirst Live Update application.  -->
+<application id="mfpadminconfig" name="mfpadminconfig" location="mfp-live-update.war" type="war">
+<application-bnd>
+<security-role name="configadmin">
+<user name="configUser_mfpadmin"/>
+</security-role>
+</application-bnd>
+<classloader delegation="parentLast"> </classloader>
+</application>
+<!--  Declare the JNDI properties for the MobileFirst Live Update.  -->
+<!--  Declare the IBM MobileFirst Configuration database.  -->
+<dataSource jndiName="mfpadminconfig/jdbc/ConfigDS" transactional="false">
+<jdbcDriver libraryRef="MobileFirst/JDBC/db2"/>
+<properties.db2.jcc databaseName="MFPDATA" serverName="digifilsitdb01" portNumber="50001" user="mfpsch" password="{xor}EhkPLDw3OjI+bg==" currentSchema="MFPSCH"/>
+</dataSource>
+<!--  End of configuration added by IBM MobileFirst <installmobilefirstadmin> ant task for context root '/mfpadmin'.  -->
+<!--  Begin of configuration added by IBM MobileFirst <installmobilefirstruntime> ant task for context root '/mfp'.  -->
+<!--  Declare the MobileFirst Runtime application.  -->
+<application id="mfp" name="mfp" location="mfp-server.war" type="war">
+<classloader commonLibraryRef="MFPAdaptersLib" delegation="parentLast"> </classloader>
+</application>
+<!--  Declare the JNDI properties for the MobileFirst Runtime.  -->
+<jndiEntry jndiName="mfp/mfp.authorization.server" value=""embedded""/>
+<!--  Declare the IBM MobileFirst Server Runtime database.  -->
+<dataSource jndiName="mfp/jdbc/mfpDS" transactional="false">
+<jdbcDriver libraryRef="MobileFirst/JDBC/db2"/>
+<properties.db2.jcc databaseName="MFPDATA" serverName="digifilsitdb01" portNumber="50001" user="mfpsch" password="{xor}EhkPLDw3OjI+bg==" currentSchema="MFPSCH"/>
+</dataSource>
+<!--  End of configuration added by IBM MobileFirst <installmobilefirstruntime> ant task for context root '/mfp'.  -->
+<!--  Begin of configuration added by IBM MobileFirst <installPush> ant task for context root '/imfpush'.  -->
+<!--  Declare the MobileFirst Push application.  -->
+<application id="imfpush" name="imfpush" location="mfp-push-service.war" type="war">
+<classloader delegation="parentLast"> </classloader>
+</application>
+<!--  Declare the JNDI properties for the MobileFirst Push.  -->
+<jndiEntry jndiName="imfpush/mfp.push.authorization.server.url" value=""http://digiporsitdb02:9080/mfp/api""/>
+<jndiEntry jndiName="imfpush/mfp.push.authorization.client.id" value=""push-client-id""/>
+<jndiEntry jndiName="imfpush/mfp.push.authorization.client.secret" value=""pushSecret""/>
+<jndiEntry jndiName="imfpush/mfp.push.services.ext.security" value=""com.ibm.mfp.push.server.security.plugin.OAuthSecurityPlugin""/>
+<jndiEntry jndiName="imfpush/mfp.push.db.type" value=""DB""/>
+<!--  (MV) 20180813: added for push service issue iFix  -->
+<jndiEntry jndiName="imfpush/mfp.push.authorization.isPushAuth" value=""true""/>
+<!--  Declare the IBM MobileFirst Server Push database.  -->
+<!--  <dataSource jndiName="imfpush/jdbc/imfPushDS" transactional="false">
+        <jdbcDriver libraryRef="MobileFirst/JDBC/db2"/>
+        <properties.db2.jcc databaseName="MFPDATA" serverName="digifilsitdb01" portNumber="50001" user="mfpsch" password="{xor}EhkPLDw3OjI+bg==" currentSchema="MFPSCH"/>
+    </dataSource>  -->
+<dataSource jndiName="imfpush/jdbc/imfPushDS" transactional="false">
+<jdbcDriver libraryRef="MobileFirst/JDBC/db2"/>
+<properties.db2.jcc databaseName="PUSH" serverName="digipushsitdb01" portNumber="50000" user="pushinst" password="{xor}LyosNzYxLCsfbm1s" currentSchema="PUSHSCHM"/>
+</dataSource>
+<!--  End of configuration added by IBM MobileFirst <installPush> ant task for context root '/imfpush'.  -->
+<!--  Enabling trace  -->
+<!-- trace logs for APNS -->
+<logging traceSpecification="*=info:com.ibm.mfp.push.*=finest" traceFileName="trace.log" maxFileSize="20" maxFiles="20" traceFormat=""/>
+<!--  logging traceSpecification="*=info:com.ibm.mfp.push.*=fine" traceFileName="trace.log" maxFileSize="20" maxFiles="20" traceFormat=""/ -->
+<!--  logging traceSpecification="*=info:com.ibm.mfp.push.server.rest.resource.DeviceResource=all" traceFileName="pushtrace.log" maxFileSize="50" maxFiles="20" traceFormat=""/ -->
+<!--  logging  traceSpecification="info:com.ibm.ws.rsadapter.jdbc.WSJdbcPreparedStatement=all" traceFileName="trace.log"  maxFileSize="200" maxFiles="5" traceFormat="BASIC" /  -->
+<!--  logging traceSpecification="*=info:com.ibm.mfp.server.persistency.internal.PersistentStorageJdbcImpl=fine" traceFileName="trace.log" maxFileSize="200" maxFiles="5" traceFormat="BASIC"/  -->
+<jndiEntry jndiName="imfpush/mfp.push.gcm.proxy.enabled" value=""true""/>
+<jndiEntry jndiName="imfpush/mfp.push.gcm.proxy.protocol" value=""http""/>
+<jndiEntry jndiName="imfpush/mfp.push.gcm.proxy.host" value=""10.191.191.39""/>
+<jndiEntry jndiName="imfpush/mfp.push.gcm.proxy.port" value=""9090""/>
+<jndiEntry jndiName="imfpush/mfp.push.apns.http2.enabled" value=""true""/>
+<jndiEntry jndiName="imfpush/mfp.push.apns.proxy.enabled" value=""true""/>
+<jndiEntry jndiName="imfpush/mfp.push.apns.proxy.type" value=""http""/>
+<jndiEntry jndiName="imfpush/mfp.push.apns.proxy.host" value=""10.191.191.39""/>
+<jndiEntry jndiName="imfpush/mfp.push.apns.proxy.port" value=""9090""/>
+<jndiEntry jndiName="imfpush/mfp.push.apns.isAIX" value=""true""/>
+<jndiEntry jndiName="mfpadmin/mfp.push.gcm.proxy.enabled" value=""true""/>
+<jndiEntry jndiName="mfpadmin/mfp.push.gcm.proxy.protocol" value=""http""/>
+<jndiEntry jndiName="mfpadmin/mfp.push.gcm.proxy.host" value=""10.191.191.39""/>
+<jndiEntry jndiName="mfpadmin/mfp.push.gcm.proxy.port" value=""9090""/>
+<!--  Cookies setting  -->
+<!--  services xmi:type="applicationserver.webcontainer:SessionManager" xmi:id="SessionManager_1483530830409" enable="true" enableUrlRewriting="false" enableCookies="true" enableSSLTracking="false" enableProtocolSwitchRewriting="false"
+sessionPersistenceMode="NONE" enableSecurityIntegration="true" allowSerializedSessionAccess="false" maxWaitTime="5" accessSessionOnTimeout="true">
+        <defaultCookieSettings xmi:id="Cookie_1483530830409" maximumAge="-1" secure="true" httpOnly="true" useContextRootAsPath="true"/>
+</services  -->
+<!--  Begin of configuration added by IBM MobileFirst installer.  -->
+<!--  Declare the IBM Application Center Console application.  -->
+<application id="appcenterconsole" name="appcenterconsole" location="appcenterconsole.war" type="war">
+<application-bnd>
+<security-role name="appcenteradmin">
+<group name="appcentergroup"/>
+</security-role>
+</application-bnd>
+</application>
+<!--  Declare the IBM Application Center Services application.  -->
+<application id="applicationcenter" name="applicationcenter" location="applicationcenter.war" type="war">
+<application-bnd>
+<security-role name="appcenteradmin">
+<group name="appcentergroup"/>
+</security-role>
+</application-bnd>
+<classloader delegation="parentLast"/>
+</application>
+<!--  Declare the JNDI properties for the IBM Application Center.  -->
+<!--  Define the AppCenter services endpoint in order for the AppCenter console to be able to invoke the REST service.
+			You need to enable this property if the server is behind a reverse proxy
+			or if the context root of the Application Center Services application is different from '/applicationcenter'.  -->
+<!--  <jndiEntry jndiName="ibm.appcenter.services.endpoint" value='"http://proxyhost:proxyport/applicationcenter"'/>  -->
+<!--  The directory with binaries of the 'aapt' program, from the Android SDK's platform-tools package.  -->
+<jndiEntry jndiName="android.aapt.dir" value=""/mfp/IBM/MobileFirst_Platform_Server/ApplicationCenter/tools/android-sdk""/>
+<!--  The protocol of the application resources URI. This property is optional. It is only needed if the protocol of the external and internal URI are different.  -->
+<!--  <jndiEntry jndiName="ibm.appcenter.proxy.protocol" value='"http"'/>  -->
+<!--  The hostname of the application resources URI.  -->
+<!--  <jndiEntry jndiName="ibm.appcenter.proxy.host" value='"proxyhost"'/>  -->
+<!--  The port of the application resources URI. This property is optional.  -->
+<!--  <jndiEntry jndiName="ibm.appcenter.proxy.port" value="proxyport"/>  -->
+<!--  Declare the jar files for DB2 access through JDBC.  -->
+<library id="DB2Lib">
+<fileset dir="${shared.resource.dir}/db2" includes="*.jar"/>
+</library>
+<!--  Declare the IBM Application Center database.  -->
+<dataSource jndiName="jdbc/AppCenterDS" transactional="false">
+<jdbcDriver libraryRef="DB2Lib"/>
+<properties.db2.jcc databaseName="MFPDATA" serverName="10.189.193.198" portNumber="50001" user="mfpsch" password="{xor}EhkPLDw3OjI+bg==" currentSchema="MFPSCH"/>
+<!--   OPTIONAL - Update the below fields to configure IBM MobileFirst servers to communicate with DB2 over SSL   -->
+<!--   <properties.db2.jcc databaseName="update DB2 instance details" serverName="update DB2 Host details" portNumber="update DB2 port details" 
+ user="update DB2 user details" password="update the Password" currentSchema="update DB2 Schema details"  sslConnection="true" sslTrustStoreLocation=" Location of the trustStore - .jks file" 
+ sslTrustStorePassword="password given for the trustStore - .jks file"/>   -->
+</dataSource>
+<!--  End of configuration added by IBM MobileFirst installer.  -->
+</server>
