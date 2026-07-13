@@ -1,0 +1,59 @@
+server.env
+WLP_SKIP_MAXPERMSIZE=true
+# MALLOCDEBUG=report_allocations,stack_depth:3
+JAVA_HOME=/mfp/IBM/WebSphere/Liberty/sdk/jre
+
+jvm.options
+# Added by the IBM MobileFirst <installmobilefirstadmin> task for id 'mfpadmin'
+-Dcom.ibm.ws.jmx.connector.client.rest.readTimeout=180000
+-Xms2048m
+-Xmx4096m
+-Dlogback.configurationFile=/yono/mfp/conf/logback.xml
+# -Xtrace:trigger=method{com/ibm/ws/rsadapter/jdbc/WSJdbcPreparedStatement.executeQuery,jstacktrace},print=mt
+-Dcom.ibm.jsse2.overrideDefaultTLS=true
+#-Dcom.ibm.mq.cfg.useIBMCipherMappings=false
+
+
+Plug-in
+
+<?xml version="1.0" encoding="UTF-8"?><!--HTTP server plugin config file for defaultServer generated on 2017.02.03 at 17:30:43 GMT+05:30-->
+<Config ASDisableNagle="false" AcceptAllContent="false" AppServerPortPreference="HostHeader" ChunkedResponse="false" FIPSEnable="false" IISDisableNagle="false" IISPluginPriority="High" IgnoreDNSFailures="false" RefreshInterval="60" ResponseChunkSize="64" SSLConsolidate="false" TrustedProxyEnable="false" VHostMatchingCompat="false">
+   <Log LogLevel="Error" Name="./logs/defaultServer/http_plugin.log"/>
+   <Property Name="ESIEnable" Value="true"/>
+   <Property Name="ESIMaxCacheSize" Value="1024"/>
+   <Property Name="ESIInvalidationMonitor" Value="false"/>
+   <Property Name="ESIEnableToPassCookies" Value="false"/>
+   <Property Name="PluginInstallRoot" Value="."/>
+<!-- Configuration generated using httpEndpointRef=defaultHttpEndpoint-->
+<!-- The default_host contained only aliases for endpoint defaultHttpEndpoint.
+	 The generated VirtualHostGroup will contain only configured web server ports:
+		webserverPort=8080
+		webserverSecurePort=443 -->
+   <VirtualHostGroup Name="default_host">
+      <VirtualHost Name="*:8080"/>
+      <VirtualHost Name="*:443"/>
+   </VirtualHostGroup>
+   <ServerCluster CloneSeparatorChange="false" GetDWLMTable="false" IgnoreAffinityRequests="true" LoadBalance="Round Robin" Name="defaultServer_default_node_Cluster" PostBufferSize="0" PostSizeLimit="-1" RemoveSpecialHeaders="true" RetryInterval="60">
+      <Server CloneID="db517246-3a83-4d47-85c5-44cbab088e94" ConnectTimeout="5" ExtendedHandshake="false" MaxConnections="-1" Name="default_node_defaultServer" ServerIOTimeout="900" WaitForContinue="false">
+         <Transport Hostname="digiporsitdb02" Port="9080" Protocol="http"/>
+         <Transport Hostname="digiporsitdb02" Port="9443" Protocol="https">
+            <Property Name="keyring" Value="security/Mobile-sit.kdb"/>
+            <Property Name="stashfile" Value="security/Mobile-sit.sth"/>
+            <Property Name="certLabel" Value="default"/>
+         </Transport>
+      </Server>
+      <PrimaryServers>
+         <Server Name="default_node_defaultServer"/>
+      </PrimaryServers>
+   </ServerCluster>
+   <UriGroup Name="default_host_defaultServer_default_node_Cluster_URIs">
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/mfpconsole/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/mfpadminconfig/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/mfp-dev-artifacts/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/IBMJMXConnectorREST/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/mfp/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/mfpadmin/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/doc/*"/>
+   </UriGroup>
+   <Route ServerCluster="defaultServer_default_node_Cluster" UriGroup="default_host_defaultServer_default_node_Cluster_URIs" VirtualHostGroup="default_host"/>
+</Config>
